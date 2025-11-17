@@ -321,32 +321,34 @@ void tras() {
 }
 
 void esquerdoFrente() {
-  digitalWrite(motor_esquerdo_frente, LOW);
-  digitalWrite(motor_esquerdo_traz, LOW);
-  digitalWrite(motor_direito_frente, HIGH);
-  digitalWrite(motor_direito_traz, LOW);
-}
-
-void esquerdoTras() {
-  digitalWrite(motor_esquerdo_frente, LOW);
+  digitalWrite(motor_esquerdo_frente, HIGH);
   digitalWrite(motor_esquerdo_traz, LOW);
   digitalWrite(motor_direito_frente, LOW);
   digitalWrite(motor_direito_traz, HIGH);
 }
 
-void direitoFrente() {
+void direitoTras() {
   digitalWrite(motor_esquerdo_frente, HIGH);
   digitalWrite(motor_esquerdo_traz, LOW);
   digitalWrite(motor_direito_frente, LOW);
+  digitalWrite(motor_direito_traz, HIGH);
+}
+
+
+void esquerdoTras() {
+  digitalWrite(motor_esquerdo_frente, LOW);
+  digitalWrite(motor_esquerdo_traz, HIGH);
+  digitalWrite(motor_direito_frente, HIGH);
   digitalWrite(motor_direito_traz, LOW);
 }
 
-void direitoTras() {
+void direitoFrente() {
   digitalWrite(motor_esquerdo_frente, LOW);
   digitalWrite(motor_esquerdo_traz, HIGH);
-  digitalWrite(motor_direito_frente, LOW);
+  digitalWrite(motor_direito_frente, HIGH);
   digitalWrite(motor_direito_traz, LOW);
 }
+
 
 // ==================== API COM LUZ ======================
 void handleAPI() {
