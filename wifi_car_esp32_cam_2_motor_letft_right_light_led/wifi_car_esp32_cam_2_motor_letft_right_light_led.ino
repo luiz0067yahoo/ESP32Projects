@@ -4,22 +4,22 @@
 #include "esp_camera.h"
 
 // ==================== CONFIGURAÇÕES DA CÂMERA ======================
-#define PWDN_GPIO_NUM     32
-#define RESET_GPIO_NUM    -1
-#define XCLK_GPIO_NUM      0
-#define SIOD_GPIO_NUM     26
-#define SIOC_GPIO_NUM     27
-#define Y9_GPIO_NUM       35
-#define Y8_GPIO_NUM       34
-#define Y7_GPIO_NUM       39
-#define Y6_GPIO_NUM       36
-#define Y5_GPIO_NUM       21
-#define Y4_GPIO_NUM       19
-#define Y3_GPIO_NUM       18
-#define Y2_GPIO_NUM        5
-#define VSYNC_GPIO_NUM    25
-#define HREF_GPIO_NUM     23
-#define PCLK_GPIO_NUM     22
+#define PWDN_GPIO_NUM 32
+#define RESET_GPIO_NUM -1
+#define XCLK_GPIO_NUM 0
+#define SIOD_GPIO_NUM 26
+#define SIOC_GPIO_NUM 27
+#define Y9_GPIO_NUM 35
+#define Y8_GPIO_NUM 34
+#define Y7_GPIO_NUM 39
+#define Y6_GPIO_NUM 36
+#define Y5_GPIO_NUM 21
+#define Y4_GPIO_NUM 19
+#define Y3_GPIO_NUM 18
+#define Y2_GPIO_NUM 5
+#define VSYNC_GPIO_NUM 25
+#define HREF_GPIO_NUM 23
+#define PCLK_GPIO_NUM 22
 
 // ==================== REDE WI-FI ======================
 const char* ssid = "ESP32-CAM-Car";
@@ -29,11 +29,11 @@ IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 // ==================== PINOS DOS MOTORES E LED ======================
-#define motor_esquerdo_frente 12
-#define motor_esquerdo_traz   13
-#define motor_direito_frente  15
-#define motor_direito_traz    14
-#define LED_PIN               4   // LED Flash (GPIO 4)
+#define motor_esquerdo_frente 02
+#define motor_esquerdo_traz 13
+#define motor_direito_frente 15
+#define motor_direito_traz 14
+#define LED_PIN 4  // LED Flash (GPIO 4)
 
 WebServer server(80);
 
@@ -186,13 +186,13 @@ void startCamera() {
 }
 
 void handleCam() {
-  camera_fb_t *fb = esp_camera_fb_get();
+  camera_fb_t* fb = esp_camera_fb_get();
   if (!fb) {
     server.send(500, "text/plain", "Erro ao capturar imagem");
     return;
   }
   server.sendHeader("Content-Type", "image/jpeg");
-  server.send_P(200, "image/jpeg", (const char *)fb->buf, fb->len);
+  server.send_P(200, "image/jpeg", (const char*)fb->buf, fb->len);
   esp_camera_fb_return(fb);
 }
 
@@ -202,6 +202,7 @@ void parar() {
   digitalWrite(motor_esquerdo_traz, LOW);
   digitalWrite(motor_direito_frente, LOW);
   digitalWrite(motor_direito_traz, LOW);
+  digitalWrite(motor_esquerdo_frente, LOW);
 }
 
 void frente() {
@@ -215,35 +216,36 @@ void tras() {
   digitalWrite(motor_esquerdo_frente, LOW);
   digitalWrite(motor_esquerdo_traz, HIGH);
   digitalWrite(motor_direito_frente, LOW);
-  digitalWrite(motor_direito_traz, HIGH);
+  digitalWrite(motor_direito_traz, HIGH); 
 }
 
 void esquerdoFrente() {
   digitalWrite(motor_esquerdo_frente, LOW);
-  digitalWrite(motor_esquerdo_traz, LOW);
+  digitalWrite(motor_esquerdo_traz, HIGH);
   digitalWrite(motor_direito_frente, HIGH);
+  digitalWrite(motor_direito_traz, LOW);
+}
+
+
+void direitoTras() {
+   digitalWrite(motor_esquerdo_frente, LOW);
+  digitalWrite(motor_esquerdo_traz, HIGH);
+  digitalWrite(motor_direito_frente, HIGH);
+  digitalWrite(motor_direito_traz, LOW);
+}
+
+void esquerdoTras() {
+   digitalWrite(motor_esquerdo_frente, HIGH);
+  digitalWrite(motor_esquerdo_traz, LOW);
+  digitalWrite(motor_direito_frente, LOW);
   digitalWrite(motor_direito_traz, HIGH);
 }
 
 
 void direitoFrente() {
-  digitalWrite(motor_esquerdo_frente, HIGH);
-  digitalWrite(motor_esquerdo_traz, HIGH);
-  digitalWrite(motor_direito_frente, LOW);
-  digitalWrite(motor_direito_traz, LOW);
-}
-
-void esquerdoTras() {
-  digitalWrite(motor_esquerdo_frente, HIGH);
-  digitalWrite(motor_esquerdo_traz, HIGH);
-  digitalWrite(motor_direito_frente, LOW);
-  digitalWrite(motor_direito_traz, LOW);
-}
-
-void direitoTras() {
-  digitalWrite(motor_esquerdo_frente, LOW);
+   digitalWrite(motor_esquerdo_frente, HIGH);
   digitalWrite(motor_esquerdo_traz, LOW);
-  digitalWrite(motor_direito_frente, HIGH);
+  digitalWrite(motor_direito_frente, LOW);
   digitalWrite(motor_direito_traz, HIGH);
 }
 
@@ -280,13 +282,15 @@ void setup() {
 
   // Configura LED
   pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH); // Inicia ligado
+  digitalWrite(LED_PIN, HIGH);  // Inicia ligado
 
   // Configura motores
   pinMode(motor_esquerdo_frente, OUTPUT);
   pinMode(motor_esquerdo_traz, OUTPUT);
   pinMode(motor_direito_frente, OUTPUT);
   pinMode(motor_direito_traz, OUTPUT);
+
+
   parar();
 
   // WiFi AP
@@ -297,7 +301,9 @@ void setup() {
   startCamera();
 
   // Rotas
-  server.on("/", HTTP_GET, []() { server.send(200, "text/html", html); });
+  server.on("/", HTTP_GET, []() {
+    server.send(200, "text/html", html);
+  });
   server.on("/cam", HTTP_GET, handleCam);
   server.on("/api/comando", HTTP_POST, handleAPI);
   server.begin();
