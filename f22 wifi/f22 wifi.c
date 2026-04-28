@@ -47,12 +47,12 @@ const char html[] PROGMEM = R"rawliteral(
         body {margin:0;padding:20px;font-family:Arial;text-align:center;background:#111;color:#0f0;}
         h2 {margin:10px 0;color:#0f0;}
         .container {display:grid;grid-template-columns:repeat(7,1fr);gap:12px;max-width:80%;margin:30px auto;}
-        button {font-size:28px;height:80px;background:#0f0;color:#000;border:none;border-radius:15px;box-shadow:0 6px 12px #000;transition:0.15s; line-height:1.1;}
+        button {font-size:28px;height:80px;background:#00f;color:#000;border:none;border-radius:15px;box-shadow:0 6px 12px #000;transition:0.15s; line-height:1.1;}
         button:active {transform:scale(0.92);box-shadow:0 3px 6px #000;}
-        .cima {background:#0f0;}
+        .cima {background:#00f;}
         .baixo {background:#00f; color:white;}
         .stop {background:#f00;color:white;}
-        .motor {background:#ff0;color:#000;}
+        .motor {background:#0f0;color:#000;}
         #status {font-size:22px;margin:15px;color:#ff0;}
     </style>
 </head>
