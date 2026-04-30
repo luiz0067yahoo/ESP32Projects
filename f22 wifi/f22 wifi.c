@@ -1,4 +1,3 @@
-
 #include <WiFi.h>
 #include <WebServer.h>
 #include <ArduinoJson.h>
@@ -13,8 +12,8 @@ IPAddress gateway(192, 168, 4, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 // ==================== PINOS ======================
-#define MOTOR_PWM_PIN     12
-#define SERVO_WING_LEFT   13
+#define MOTOR_PWM_PIN     13
+#define SERVO_WING_LEFT   12
 #define SERVO_WING_RIGHT  14
 #define LED_PIN           4
 
@@ -22,7 +21,7 @@ Servo wingLeftServo;
 Servo wingRightServo;
 
 // ==================== PWM e Rampa ======================
-int pwmChannel = 0;
+// No Core 3.0+, o gerenciamento de canais é automático.
 int pwmFreq = 5000;
 int pwmResolution = 8;
 
@@ -35,7 +34,7 @@ const unsigned long RAMP_INTERVAL = 200;
 // ==================== WebServer ======================
 WebServer server(80);
 
-// ==================== HTML - Botões CIMA / BAIXO ======================
+// ==================== HTML - MANTIDO ORIGINAL ======================
 const char html[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
 <html lang='pt-br'>
@@ -58,7 +57,6 @@ const char html[] PROGMEM = R"rawliteral(
 </head>
 <body>
     <h2>Controle do F22</h2>
-
     <div class="container">
         <button style="visibility:hidden;"></button>
         <button id='cima' class='cima'>🔼</button>
@@ -67,7 +65,6 @@ const char html[] PROGMEM = R"rawliteral(
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
-        
         <button id='esq'>◀️</button>
         <button style="visibility:hidden;"></button>
         <button id='dir'>▶️</button>
@@ -75,7 +72,6 @@ const char html[] PROGMEM = R"rawliteral(
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
         <button id='motor' class='motor'>📶</button>
-        
         <button style="visibility:hidden;"></button>
         <button id='baixo' class='baixo'>🔽</button>
         <button style="visibility:hidden;"></button>
@@ -83,7 +79,6 @@ const char html[] PROGMEM = R"rawliteral(
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
-        
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
@@ -92,15 +87,12 @@ const char html[] PROGMEM = R"rawliteral(
         <button style="visibility:hidden;"></button>
         <button style="visibility:hidden;"></button>
     </div>
-
     <p id='status'>Conectado</p>
-
 <script>
     let throttleRamp = 0;
     let motorStop = 0;
     let servoLeftAngle = 90;
     let servoRightAngle = 90;
-
     function enviar() {
         fetch('/api/comando', {
             method: 'POST',
@@ -113,52 +105,25 @@ const char html[] PROGMEM = R"rawliteral(
             })
         });
     }
-
     document.querySelectorAll('button').forEach(btn => {
         const id = btn.id;
-
         const start = () => {
-            throttleRamp = 0;
-            motorStop = 0;
-
-            if (id === 'cima') {
-                servoLeftAngle = 45;   // PARA CIMA
-                servoRightAngle = 45;
-            }
-            else if (id === 'baixo') {
-                servoLeftAngle = 135;  // PARA BAIXO
-                servoRightAngle = 135;
-            }
-            else if (id === 'esq') {
-                servoLeftAngle = 45;
-                servoRightAngle = 135;
-            }
-            else if (id === 'dir') {
-                servoLeftAngle = 135;
-                servoRightAngle = 45;
-            }
-            else if (id === 'parar') {
-                servoLeftAngle = 90;
-                servoRightAngle = 90;
-                motorStop = 1;
-            }
-            else if (id === 'motor') {
-                throttleRamp = 1;
-            }
+            throttleRamp = 0; motorStop = 0;
+            if (id === 'cima') { servoLeftAngle = 45; servoRightAngle = 45; }
+            else if (id === 'baixo') { servoLeftAngle = 135; servoRightAngle = 135; }
+            else if (id === 'esq') { servoLeftAngle = 45; servoRightAngle = 135; }
+            else if (id === 'dir') { servoLeftAngle = 135; servoRightAngle = 45; }
+            else if (id === 'parar') { servoLeftAngle = 90; servoRightAngle = 90; motorStop = 1; }
+            else if (id === 'motor') { throttleRamp = 1; }
             enviar();
         };
-
         const stop = () => {
-            throttleRamp = 0;
-            motorStop = 0;
-
+            throttleRamp = 0; motorStop = 0;
             if (id === 'cima' || id === 'baixo' || id === 'esq' || id === 'dir') {
-                servoLeftAngle = 90;
-                servoRightAngle = 90;
+                servoLeftAngle = 90; servoRightAngle = 90;
             }
             enviar();
         };
-
         btn.ontouchstart = btn.onmousedown = e => { e.preventDefault(); start(); };
         btn.ontouchend = btn.onmouseup = btn.onmouseleave = stop;
     });
@@ -167,11 +132,11 @@ const char html[] PROGMEM = R"rawliteral(
 </html>
 )rawliteral";
 
-// ==================== FUNÇÕES ======================
+// ==================== FUNÇÕES CORRIGIDAS ======================
 void setupPWM() {
-  ledcSetup(pwmChannel, pwmFreq, pwmResolution);
-  ledcAttachPin(MOTOR_PWM_PIN, pwmChannel);
-  ledcWrite(pwmChannel, 0);
+  // Substitui ledcSetup e ledcAttachPin
+  ledcAttach(MOTOR_PWM_PIN, pwmFreq, pwmResolution);
+  ledcWrite(MOTOR_PWM_PIN, 0);
 }
 
 void startMotorRamp() {
@@ -185,7 +150,7 @@ void startMotorRamp() {
 void stopMotor() {
   currentMotorSpeed = 0;
   isRamping = false;
-  ledcWrite(pwmChannel, 0);
+  ledcWrite(MOTOR_PWM_PIN, 0); // Usa o PINO em vez do canal
 }
 
 void controlarServos(int leftAngle, int rightAngle) {
@@ -208,7 +173,6 @@ void handleAPI() {
   if (throttleRampCmd == 1) startMotorRamp();
 
   controlarServos(servoL, servoR);
-
   server.send(200, "application/json", "{\"status\":\"ok\"}");
 }
 
@@ -233,7 +197,7 @@ void setup() {
 
   server.begin();
   Serial.println("F22 WiFi Pronto!");
-  Serial.print("IP → http://");
+  Serial.print("IP -> http://");
   Serial.println(WiFi.softAPIP());
 }
 
@@ -245,7 +209,8 @@ void loop() {
     if (now - lastRampStepTime >= RAMP_INTERVAL) {
       currentMotorSpeed += RAMP_STEP;
       if (currentMotorSpeed > 255) currentMotorSpeed = 255;
-      ledcWrite(pwmChannel, currentMotorSpeed);
+      
+      ledcWrite(MOTOR_PWM_PIN, currentMotorSpeed); // Atualizado para o pino
       lastRampStepTime = now;
 
       if (currentMotorSpeed >= 255) isRamping = false;
