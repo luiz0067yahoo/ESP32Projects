@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ESP Chat</title>
+<style>
+body{
+font-family:Arial;
+background:#111;
+color:white;
+padding:20px;
+}
+#chat{
+height:300px;
+overflow:auto;
+border:1px solid #555;
+padding:10px;
+margin-bottom:10px;
+}
+input{
+width:80%;
+padding:10px;
+}
+button{
+padding:10px;
+}
+</style>
+</head>
+<body>
+
+<h2>ESP CHAT 1</h2>
+
+<div id="chat"></div>
+
+<input id="msg">
+<button onclick="sendMsg()">Enviar</button>
+
+<script>
+
+async function sendMsg(){
+let txt=document.getElementById("msg").value;
+
+await fetch("/send?msg="+encodeURIComponent(txt));
+
+document.getElementById("msg").value="";
+}
+
+async function update(){
+
+let r = await fetch("/get");
+let t = await r.text();
+
+document.getElementById("chat").innerHTML=t;
+}
+
+setInterval(update,1000);
+
+</script>
+
+</body>
+</html>

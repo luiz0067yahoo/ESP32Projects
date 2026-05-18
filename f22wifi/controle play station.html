@@ -4,37 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Botões PlayStation</title>
+<title>Controle PlayStation</title>
 
 <style>
 
 html, body{
-    margin:0 0 0 0;
-    padding:0 0 0 0;
-    font-family:Arial;
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    
     display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:Arial;
 }
+
+.container{
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-items: ceter;
+}
+
+/* =========================
+   AUXILIARES
+========================= */
+
 .row{
     width:100%;
     display:flex;
+    justify-content: center;
 }
+
 .square-70{
-  width:70px;
+    width:70px;
     height:70px;
 }
 
-/* ÁREA DOS BOTÕES */
+/* =========================
+   BOTÕES PLAYSTATION
+========================= */
 
 .botoes-playstation{
-    width: 210px;
-    height: 210px;
-    padding:20px 20px 20px 20px;
+
+    width:210px;
+    height:210px;
+
+    padding:20px;
+
     border-radius:50%;
+
     display:flex;
     flex-wrap:wrap;
+
     background:#1b1b1b;
+
+    box-shadow:
+        inset -15px -15px 20px rgba(0,0,0,.85),
+        inset 8px 8px 10px rgba(255,255,255,.06),
+        0 10px 20px rgba(0,0,0,.6);
 }
-/* BOTÃO */
 
 .btn{
 
@@ -55,26 +89,21 @@ html, body{
 
     border:3px solid #000;
 
-    color:white;
-
     background:
         radial-gradient(circle at 30% 30%,
         #5f5f5f 0%,
         #2d2d2d 45%,
         #111 100%);
 
+    color:white;
+
     box-shadow:
         inset -8px -8px 12px rgba(0,0,0,.9),
         inset 5px 5px 8px rgba(255,255,255,.08),
         0 8px 15px rgba(0,0,0,.8);
 
-    transition:
-        transform .05s,
-        background .05s,
-        box-shadow .05s;
+    transition:.05s;
 }
-
-/* EFEITO AO PRESSIONAR */
 
 .btn:active{
 
@@ -82,48 +111,19 @@ html, body{
         translateY(4px)
         scale(.96);
 
-    /* CENTRO MAIS CLARO */
-
-   
-
     box-shadow:
         inset 0 0 15px rgba(255,255,255,.35),
         inset 0 0 30px rgba(0,0,0,.95);
 }
 
-/* POSIÇÕES */
+.triangulo{ color:#42ff73; }
+.quadrado{ color:#ff6cff; }
+.circulo{ color:#ff5b5b; }
+.xis{ color:#67b7ff; }
 
-.triangulo{
-    color:#42ff73;
-}
-.triangulo:active{
-    color:#c8ffd7;
-    font-size:38px;
-}
-
-.quadrado{
-    color:#ff6cff;
-}
-.quadrado:active{
-    color:#f8c8ff;    
-    font-size:38px;
-}
-
-.circulo{
-    color:#ff5b5b;
-}
-.circulo:active{
-    color:#ff9999;    
-    font-size:38px;
-}
-
-.xis{
-    color:#67b7ff;
-}
-.xis:active{
-    color:#c8e8ff;
-    font-size:38px;
-}
+/* =========================
+   DPAD
+========================= */
 
 .dpad-playstation{
 
@@ -137,7 +137,6 @@ html, body{
     display:flex;
     flex-wrap:wrap;
 
-    
     background:#1b1b1b;
 
     box-shadow:
@@ -145,10 +144,6 @@ html, body{
         inset 8px 8px 10px rgba(255,255,255,.06),
         0 10px 20px rgba(0,0,0,.6);
 }
-
-/* =========================
-   BOTÃO DIRECIONAL
-========================= */
 
 .dbtn{
 
@@ -171,106 +166,8 @@ html, body{
         inset -5px -5px 10px rgba(0,0,0,.8),
         inset 3px 3px 5px rgba(255,255,255,.08);
 
-    transition:
-        transform .05s,
-        background .05s;
+    transition:.05s;
 }
-
-/* FORMATO */
-
-.cima{
-    border-radius:14px 14px 5px 5px;
-}
-
-.baixo{
-    border-radius:5px 5px 14px 14px;
-}
-
-.esquerda{
-    border-radius:14px 5px 5px 14px;
-}
-
-.direita{
-    border-radius:5px 14px 14px 5px;
-}
-
-/* CENTRO */
-
-.centro{
-
-    width:70px;
-    height:70px;
-
-    background:
-        linear-gradient(
-        145deg,
-        #4c4c4c,
-        #1a1a1a);
-
-    box-shadow:
-        inset -5px -5px 10px rgba(0,0,0,.8),
-        inset 3px 3px 5px rgba(255,255,255,.08);
-}
-
-/* =========================
-   SETAS
-========================= */
-
-.seta{
-    position:absolute;
-}
-
-/* CIMA */
-
-.cima .seta{
-
-    border-left:12px solid transparent;
-    border-right:12px solid transparent;
-    border-bottom:18px solid #151515;
-
-    left:23px;
-    top:22px;
-}
-
-/* BAIXO */
-
-.baixo .seta{
-
-    border-left:12px solid transparent;
-    border-right:12px solid transparent;
-    border-top:18px solid #151515;
-
-    left:23px;
-    top:28px;
-}
-
-/* ESQUERDA */
-
-.esquerda .seta{
-
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    border-right:18px solid #151515;
-
-    left:22px;
-    top:23px;
-}
-
-/* DIREITA */
-
-.direita .seta{
-
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    border-left:18px solid #151515;
-
-    left:30px;
-    top:23px;
-}
-
-/* =========================
-   EFEITO
-========================= */
 
 .dbtn:active{
 
@@ -283,82 +180,482 @@ html, body{
         145deg,
         #8a8a8a,
         #3b3b3b);
+}
+
+.cima{ border-radius:14px 14px 5px 5px; }
+.baixo{ border-radius:5px 5px 14px 14px; }
+.esquerda{ border-radius:14px 5px 5px 14px; }
+.direita{ border-radius:5px 14px 14px 5px; }
+
+.seta{
+    position:absolute;
+}
+
+.cima .seta{
+
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-bottom:18px solid #151515;
+
+    left:23px;
+    top:22px;
+}
+
+.baixo .seta{
+
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-top:18px solid #151515;
+
+    left:23px;
+    top:28px;
+}
+
+.esquerda .seta{
+
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-right:18px solid #151515;
+
+    left:22px;
+    top:23px;
+}
+
+.direita .seta{
+
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-left:18px solid #151515;
+
+    left:30px;
+    top:23px;
+}
+
+/* =========================
+   ANALÓGICO
+========================= */
+
+.analogico-area{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:20px;
+}
+
+.analogico{
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    touch-action:none;
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #4d4d4d 0%,
+        #222 60%,
+        #111 100%);
 
     box-shadow:
-        inset 0 0 10px rgba(255,255,255,.15),
-        inset 0 0 18px rgba(0,0,0,.9);
+        inset -15px -15px 20px rgba(0,0,0,.9),
+        inset 8px 8px 10px rgba(255,255,255,.05),
+        0 10px 20px rgba(0,0,0,.8);
+}
+
+.stick{
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%, -50%);
+
+    cursor:pointer;
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #777 0%,
+        #333 50%,
+        #111 100%);
+
+    box-shadow:
+        inset -8px -8px 12px rgba(0,0,0,.9),
+        inset 5px 5px 8px rgba(255,255,255,.08),
+        0 8px 15px rgba(0,0,0,.8);
+}
+
+.info{
+
+    color:white;
+    font-size:20px;
 }
 
 </style>
 </head>
 
 <body>
-<div class="dpad-playstation">
 
-    <!-- LINHA 1 -->
+<div class="container">
 
-    <div class="row">
+    
+    <div class="row" style="padding-bottom: 20px;" >
+        <div style="width: 210px;padding:20px; border-radius:22px;  gap:20px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
+            <div class="row" >
+                <button class="dbtn" style="border-radius:22px; width:150px;">
+                    <div class="seta"></div>
+                </button>
+            </div>
+            <div class="row" >
+                <button class="dbtn" style="border-radius:22px; width:150px;">
+                    <div class="seta"></div>
+                </button>
+            </div>
+        </div>
+    
+        <div style="height: 170px;width:360px;"></div>
 
-        <div class="square-70"></div>
 
-        <button class="dbtn cima">
-            <div class="seta"></div>
-        </button>
-
-        <div class="square-70"></div>
-
+        <div style="width: 210px;padding:20px; border-radius:22px;  gap:20px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
+            <div class="row" >
+                <button class="dbtn" style="border-radius:22px; width:150px;">
+                    <div class="seta"></div>
+                </button>
+            </div>
+            <div class="row" >
+                <button class="dbtn" style="border-radius:22px; width:150px;">
+                    <div class="seta"></div>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- LINHA 2 -->
-
     <div class="row">
-
-        <button class="dbtn esquerda">
-            <div class="seta"></div>
-        </button>
-
-        <div class="square-70"></div>
-
-        <button class="dbtn direita">
-            <div class="seta"></div>
-        </button>
-
     </div>
 
-    <!-- LINHA 3 -->
-
+    
+    <!-- DPAD -->
     <div class="row">
+        <div class="dpad-playstation">
 
-        <div class="square-70"></div>
+            <div class="row">
+                <div class="square-70"></div>
 
-        <button class="dbtn baixo">
-            <div class="seta"></div>
-        </button>
+                <button class="dbtn cima">
+                    <div class="seta"></div>
+                </button>
 
-        <div class="square-70"></div>
+                <div class="square-70"></div>
+            </div>
+
+            <div class="row">
+
+                <button class="dbtn esquerda">
+                    <div class="seta"></div>
+                </button>
+
+                <div class="square-70"></div>
+
+                <button class="dbtn direita">
+                    <div class="seta"></div>
+                </button>
+
+            </div>
+
+            <div class="row">
+
+                <div class="square-70"></div>
+
+                <button class="dbtn baixo">
+                    <div class="seta"></div>
+                </button>
+
+                <div class="square-70"></div>
+
+            </div>
+
+        </div>
+
+        <div style="height: 170px;width:360px;margin-left: 20px;margin-right: 20px;margin-bottom: 20px;border-radius:22px;padding:20px 20px 20px 20px;display: flex;flex-wrap: wrap; align-self:flex-end;background-color: #1b1b1b;">
+            <div class="row" style="justify-content: space-between;">
+                <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
+                    <button class="dbtn" style="height: 40px;">
+                        
+                    </button>
+                    Select
+                </label>
+                <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
+                    <button class="dbtn " style="height: 40px;">
+                    </button>
+                    Start
+                </label>
+            </div>
+            <div class="row" style="justify-content: center;">
+                <label style="width:100px;display:flex;flex-direction: column;align-items: center;color:white;">
+                    <button class="dbtn diretira" style="height: 40px;width:100px">
+                        <div class="seta"></div>
+                    </button>
+                    Analógico
+                </label>
+            </div>
+        </div>
+
+        <!-- BOTÕES -->
+
+        <div class="botoes-playstation">
+
+            <div class="row">
+                <div class="square-70"></div>
+                <button class="btn triangulo">△</button>
+                <div class="square-70"></div>
+            </div>
+
+            <div class="row">
+                <button class="btn quadrado">□</button>
+                <div class="square-70"></div>
+                <button class="btn circulo">○</button>
+            </div>
+
+            <div class="row">
+                <div class="square-70"></div>
+                <button class="btn xis">✕</button>
+                <div class="square-70"></div>
+            </div>
+
+        </div>
 
     </div>
+    <div class="row">
+        <!-- ANALÓGICO  ESQUERDO-->
+        <div class="analogico-area">
 
+            <div class="analogico" id="analogico-esquerdo">
+                <div class="stick"></div>
+            </div>
+
+        </div>
+        <div class="square-70"></div>
+        <!-- ANALÓGICO DIREITO -->
+
+        <div class="analogico-area">
+
+            <div class="analogico" id="analogico-direito">
+                <div class="stick"></div>
+            </div>
+
+        </div>
+ 
+    </div>
 </div>
 
-<div class="botoes-playstation">
+<script>
 
-    <div class="row">
-        <div class="square-70"></div>
-        <button class="btn triangulo">△</button>
-        <div class="square-70"></div>
-    </div>
-    <div class="row">
-        <button class="btn quadrado">□</button>
-        <div class="square-70"></div>
-        <button class="btn circulo">○</button>
-    </div>
-    <div class="row">
-        <div class="square-70"></div>
-        <button class="btn xis">✕</button>
-        <div class="square-70"></div>
-    </div>
-</div>
+/* =========================
+   ESTADO GLOBAL
+========================= */
+
+const controle = {
+
+    analogicoEsquerdo:{
+        x:0,
+        y:0
+    },
+
+    analogicoDireito:{
+        x:0,
+        y:0
+    },
+
+    botoes:{
+
+        triangulo:false,
+        quadrado:false,
+        circulo:false,
+        xis:false
+    }
+};
+
+/* =========================
+   ANALÓGICOS
+========================= */
+
+criarAnalogico(
+    "analogico-esquerdo",
+    "analogicoEsquerdo"
+);
+
+criarAnalogico(
+    "analogico-direito",
+    "analogicoDireito"
+);
+
+function criarAnalogico(id, nomeVariavel){
+
+    const analogico =
+        document.getElementById(id);
+
+    const stick =
+        analogico.querySelector(".stick");
+
+    let dragging = false;
+
+    const maxDistance = 60;
+
+    analogico.addEventListener(
+        "pointerdown",
+        (e)=>{
+
+            dragging = true;
+
+            mover(e);
+        }
+    );
+
+    window.addEventListener(
+        "pointerup",
+        ()=>{
+
+            dragging = false;
+
+            controle[nomeVariavel].x = 0;
+            controle[nomeVariavel].y = 0;
+
+            stick.style.transition = ".2s";
+
+            stick.style.transform =
+                `translate(-50%, -50%)`;
+
+            
+        }
+    );
+
+    window.addEventListener(
+        "pointermove",
+        (e)=>{
+
+            if(!dragging) return;
+
+            mover(e);
+        }
+    );
+
+    function mover(e){
+
+        stick.style.transition = "0s";
+
+        const rect =
+            analogico.getBoundingClientRect();
+
+        const centerX =
+            rect.left + rect.width / 2;
+
+        const centerY =
+            rect.top + rect.height / 2;
+
+        let dx = e.clientX - centerX;
+        let dy = e.clientY - centerY;
+
+        const distance =
+            Math.sqrt(dx*dx + dy*dy);
+
+        if(distance > maxDistance){
+
+            const angle =
+                Math.atan2(dy, dx);
+
+            dx =
+                Math.cos(angle) * maxDistance;
+
+            dy =
+                Math.sin(angle) * maxDistance;
+        }
+
+        stick.style.transform =
+            `translate(
+                calc(-50% + ${dx}px),
+                calc(-50% + ${dy}px)
+            )`;
+
+        controle[nomeVariavel].x =
+            +(dx / maxDistance).toFixed(2);
+
+        controle[nomeVariavel].y =
+            +(dy / maxDistance).toFixed(2);
+
+        
+    }
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+document.querySelectorAll(".btn")
+.forEach(btn=>{
+
+    const nome =
+        btn.dataset.btn;
+
+    btn.addEventListener(
+        "pointerdown",
+        ()=>{
+
+            controle.botoes[nome] = true;
+
+            
+        }
+    );
+
+    btn.addEventListener(
+        "pointerup",
+        ()=>{
+
+            controle.botoes[nome] = false;
+        }
+    );
+});
+
+/* =========================
+   STATUS
+========================= */
+
+const statusDiv =
+    document.getElementById("status");
+
+/* =========================
+   LOOP
+========================= */
+
+/*
+Aqui você pode enviar os dados:
+
+WebSocket
+ESP8266
+Fetch
+Bluetooth
+Game Engine
+etc
+*/
+
+setInterval(()=>{
+
+    console.log(controle);
+
+}, 100);
+
+</script>
 
 </body>
 </html>
