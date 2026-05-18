@@ -15,9 +15,9 @@ IPAddress subnet(255, 255, 255, 0);
 // ==================== PINOS ======================
 
 #define MOTOR_PWM_PIN     13   // D7
-#define SERVO_WING_LEFT   12   // D6
-#define SERVO_WING_RIGHT  14   // D5
-#define LED_PIN           4    // D2
+#define SERVO_WING_LEFT   12   // D6 fio verde
+#define SERVO_WING_RIGHT  14   // D5 fio amarelo
+#define LED_PIN           2    // D2
 
 #define SERVO_MIN           0    
 #define SERVO_MEDIAN        90    
@@ -31,8 +31,8 @@ Servo escMotor;
 
 // ==================== MOTOR ESC ======================
 
-const int MOTOR_MIN = 1000;
-const int MOTOR_MAX = 2000;
+const int MOTOR_MIN = 700;
+const int MOTOR_MAX = 3000;
 
 // ==================== SERVIDOR ======================
 
@@ -159,8 +159,8 @@ let motorPressed = false;
 let servoLeftAngle = 90;
 let servoRightAngle = 90;
 
-const MOTOR_MIN = 1000;
-const MOTOR_MAX = 2000;
+const MOTOR_MIN = 700;
+const MOTOR_MAX = 3000;
 const SERVO_MIN    =          0;    
 const SERVO_MEDIAN =         90;    
 const SERVO_MAX    =        180;    
@@ -232,27 +232,25 @@ document.querySelectorAll('button').forEach(btn => {
     const start = () => {
 
         if(id === 'cima'){
-
             servoLeftAngle = SERVO_MAX;
             servoRightAngle = SERVO_MIN;
         }
 
         else if(id === 'baixo'){
-
             servoLeftAngle = SERVO_MIN;
-            servoRightAngle = SERVO_MAX;
+            servoRightAngle = SERVO_MAX;            
         }
 
         else if(id === 'esq'){
 
-            servoLeftAngle = SERVO_MAX;
-            servoRightAngle = SERVO_MAX;
+            servoLeftAngle = SERVO_MIN;
+            servoRightAngle = SERVO_MIN;
         }
 
         else if(id === 'dir'){
 
-            servoLeftAngle = SERVO_MIN;
-            servoRightAngle = SERVO_MIN;
+            servoLeftAngle = SERVO_MAX;
+            servoRightAngle = SERVO_MAX;
         }
 
         else if(id === 'parar'){

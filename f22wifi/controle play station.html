@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Botões PlayStation</title>
+
+<style>
+
+html, body{
+    margin:0 0 0 0;
+    padding:0 0 0 0;
+    font-family:Arial;
+    display:flex;
+}
+.row{
+    width:100%;
+    display:flex;
+}
+.square-70{
+  width:70px;
+    height:70px;
+}
+
+/* ÁREA DOS BOTÕES */
+
+.botoes-playstation{
+    width: 210px;
+    height: 210px;
+    padding:20px 20px 20px 20px;
+    border-radius:50%;
+    display:flex;
+    flex-wrap:wrap;
+    background:#1b1b1b;
+}
+/* BOTÃO */
+
+.btn{
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:32px;
+    font-weight:bold;
+
+    cursor:pointer;
+    user-select:none;
+
+    border:3px solid #000;
+
+    color:white;
+
+    background:
+        radial-gradient(circle at 30% 30%,
+        #5f5f5f 0%,
+        #2d2d2d 45%,
+        #111 100%);
+
+    box-shadow:
+        inset -8px -8px 12px rgba(0,0,0,.9),
+        inset 5px 5px 8px rgba(255,255,255,.08),
+        0 8px 15px rgba(0,0,0,.8);
+
+    transition:
+        transform .05s,
+        background .05s,
+        box-shadow .05s;
+}
+
+/* EFEITO AO PRESSIONAR */
+
+.btn:active{
+
+    transform:
+        translateY(4px)
+        scale(.96);
+
+    /* CENTRO MAIS CLARO */
+
+   
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.35),
+        inset 0 0 30px rgba(0,0,0,.95);
+}
+
+/* POSIÇÕES */
+
+.triangulo{
+    color:#42ff73;
+}
+.triangulo:active{
+    color:#c8ffd7;
+    font-size:38px;
+}
+
+.quadrado{
+    color:#ff6cff;
+}
+.quadrado:active{
+    color:#f8c8ff;    
+    font-size:38px;
+}
+
+.circulo{
+    color:#ff5b5b;
+}
+.circulo:active{
+    color:#ff9999;    
+    font-size:38px;
+}
+
+.xis{
+    color:#67b7ff;
+}
+.xis:active{
+    color:#c8e8ff;
+    font-size:38px;
+}
+
+.dpad-playstation{
+
+    width:210px;
+    height:210px;
+
+    padding:20px;
+
+    border-radius:50%;
+
+    display:flex;
+    flex-wrap:wrap;
+
+    
+    background:#1b1b1b;
+
+    box-shadow:
+        inset -15px -15px 20px rgba(0,0,0,.85),
+        inset 8px 8px 10px rgba(255,255,255,.06),
+        0 10px 20px rgba(0,0,0,.6);
+}
+
+/* =========================
+   BOTÃO DIRECIONAL
+========================= */
+
+.dbtn{
+
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    position:relative;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+        145deg,
+        #5e5e5e,
+        #262626);
+
+    box-shadow:
+        inset -5px -5px 10px rgba(0,0,0,.8),
+        inset 3px 3px 5px rgba(255,255,255,.08);
+
+    transition:
+        transform .05s,
+        background .05s;
+}
+
+/* FORMATO */
+
+.cima{
+    border-radius:14px 14px 5px 5px;
+}
+
+.baixo{
+    border-radius:5px 5px 14px 14px;
+}
+
+.esquerda{
+    border-radius:14px 5px 5px 14px;
+}
+
+.direita{
+    border-radius:5px 14px 14px 5px;
+}
+
+/* CENTRO */
+
+.centro{
+
+    width:70px;
+    height:70px;
+
+    background:
+        linear-gradient(
+        145deg,
+        #4c4c4c,
+        #1a1a1a);
+
+    box-shadow:
+        inset -5px -5px 10px rgba(0,0,0,.8),
+        inset 3px 3px 5px rgba(255,255,255,.08);
+}
+
+/* =========================
+   SETAS
+========================= */
+
+.seta{
+    position:absolute;
+}
+
+/* CIMA */
+
+.cima .seta{
+
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-bottom:18px solid #151515;
+
+    left:23px;
+    top:22px;
+}
+
+/* BAIXO */
+
+.baixo .seta{
+
+    border-left:12px solid transparent;
+    border-right:12px solid transparent;
+    border-top:18px solid #151515;
+
+    left:23px;
+    top:28px;
+}
+
+/* ESQUERDA */
+
+.esquerda .seta{
+
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-right:18px solid #151515;
+
+    left:22px;
+    top:23px;
+}
+
+/* DIREITA */
+
+.direita .seta{
+
+    border-top:12px solid transparent;
+    border-bottom:12px solid transparent;
+    border-left:18px solid #151515;
+
+    left:30px;
+    top:23px;
+}
+
+/* =========================
+   EFEITO
+========================= */
+
+.dbtn:active{
+
+    transform:
+        translateY(3px)
+        scale(.96);
+
+    background:
+        linear-gradient(
+        145deg,
+        #8a8a8a,
+        #3b3b3b);
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,.15),
+        inset 0 0 18px rgba(0,0,0,.9);
+}
+
+</style>
+</head>
+
+<body>
+<div class="dpad-playstation">
+
+    <!-- LINHA 1 -->
+
+    <div class="row">
+
+        <div class="square-70"></div>
+
+        <button class="dbtn cima">
+            <div class="seta"></div>
+        </button>
+
+        <div class="square-70"></div>
+
+    </div>
+
+    <!-- LINHA 2 -->
+
+    <div class="row">
+
+        <button class="dbtn esquerda">
+            <div class="seta"></div>
+        </button>
+
+        <div class="square-70"></div>
+
+        <button class="dbtn direita">
+            <div class="seta"></div>
+        </button>
+
+    </div>
+
+    <!-- LINHA 3 -->
+
+    <div class="row">
+
+        <div class="square-70"></div>
+
+        <button class="dbtn baixo">
+            <div class="seta"></div>
+        </button>
+
+        <div class="square-70"></div>
+
+    </div>
+
+</div>
+
+<div class="botoes-playstation">
+
+    <div class="row">
+        <div class="square-70"></div>
+        <button class="btn triangulo">△</button>
+        <div class="square-70"></div>
+    </div>
+    <div class="row">
+        <button class="btn quadrado">□</button>
+        <div class="square-70"></div>
+        <button class="btn circulo">○</button>
+    </div>
+    <div class="row">
+        <div class="square-70"></div>
+        <button class="btn xis">✕</button>
+        <div class="square-70"></div>
+    </div>
+</div>
+
+</body>
+</html>
