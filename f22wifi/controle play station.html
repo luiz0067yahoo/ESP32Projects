@@ -1,661 +1,752 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Controle PlayStation</title>
+    <title>Controle PlayStation</title>
 
-<style>
+    <style>
+        html,
+        body {
 
-html, body{
+            margin: 0;
+            padding: 0;
 
-    margin:0;
-    padding:0;
+            width: 100%;
+            height: 100%;
 
-    width:100%;
-    height:100%;
 
-    
-    display:flex;
-    justify-content:center;
-    align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    font-family:Arial;
-}
+            font-family: Arial;
+        }
 
-.container{
-    display:flex;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-items: ceter;
-}
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-items: ceter;
+        }
 
-/* =========================
+        /* =========================
    AUXILIARES
 ========================= */
 
-.row{
-    width:100%;
-    display:flex;
-    justify-content: center;
-}
+        .row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
 
-.square-70{
-    width:70px;
-    height:70px;
-}
+        .square-70 {
+            width: 70px;
+            height: 70px;
+        }
 
-/* =========================
+
+        .nao-selecionavel {
+            -webkit-touch-callout: none;
+            /* Safari no iOS */
+            -webkit-user-select: none;
+            /* Chrome, Safari, Opera */
+            -khtml-user-select: none;
+            /* Konqueror Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Padrão moderno */
+        }
+
+        /* =========================
    BOTÕES PLAYSTATION
 ========================= */
 
-.botoes-playstation{
+        .botoes-playstation {
 
-    width:210px;
-    height:210px;
+            width: 210px;
+            height: 210px;
 
-    padding:20px;
+            padding: 20px;
 
-    border-radius:50%;
+            border-radius: 50%;
 
-    display:flex;
-    flex-wrap:wrap;
+            display: flex;
+            flex-wrap: wrap;
 
-    background:#1b1b1b;
+            background: #1b1b1b;
 
-    box-shadow:
-        inset -15px -15px 20px rgba(0,0,0,.85),
-        inset 8px 8px 10px rgba(255,255,255,.06),
-        0 10px 20px rgba(0,0,0,.6);
-}
+            box-shadow:
+                inset -15px -15px 20px rgba(0, 0, 0, .85),
+                inset 8px 8px 10px rgba(255, 255, 255, .06),
+                0 10px 20px rgba(0, 0, 0, .6);
+        }
 
-.btn{
+        .btn {
 
-    width:70px;
-    height:70px;
+            width: 70px;
+            height: 70px;
 
-    border-radius:50%;
+            border-radius: 50%;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    font-size:32px;
-    font-weight:bold;
+            font-size: 32px;
+            font-weight: bold;
 
-    cursor:pointer;
-    user-select:none;
+            cursor: pointer;
+            user-select: none;
 
-    border:3px solid #000;
+            border: 3px solid #000;
 
-    background:
-        radial-gradient(circle at 30% 30%,
-        #5f5f5f 0%,
-        #2d2d2d 45%,
-        #111 100%);
+            background:
+                radial-gradient(circle at 30% 30%,
+                    #5f5f5f 0%,
+                    #2d2d2d 45%,
+                    #111 100%);
 
-    color:white;
+            color: white;
 
-    box-shadow:
-        inset -8px -8px 12px rgba(0,0,0,.9),
-        inset 5px 5px 8px rgba(255,255,255,.08),
-        0 8px 15px rgba(0,0,0,.8);
+            box-shadow:
+                inset -8px -8px 12px rgba(0, 0, 0, .9),
+                inset 5px 5px 8px rgba(255, 255, 255, .08),
+                0 8px 15px rgba(0, 0, 0, .8);
 
-    transition:.05s;
-}
+            transition: .05s;
+        }
 
-.btn:active{
+        .btn:active {
 
-    transform:
-        translateY(4px)
-        scale(.96);
+            transform:
+                translateY(4px) scale(.96);
 
-    box-shadow:
-        inset 0 0 15px rgba(255,255,255,.35),
-        inset 0 0 30px rgba(0,0,0,.95);
-}
+            box-shadow:
+                inset 0 0 15px rgba(255, 255, 255, .35),
+                inset 0 0 30px rgba(0, 0, 0, .95);
+        }
 
-.triangulo{ color:#42ff73; }
-.quadrado{ color:#ff6cff; }
-.circulo{ color:#ff5b5b; }
-.xis{ color:#67b7ff; }
+        .triangulo {
+            color: #42ff73;
+        }
 
-/* =========================
+        .quadrado {
+            color: #ff6cff;
+        }
+
+        .circulo {
+            color: #ff5b5b;
+        }
+
+        .xis {
+            color: #67b7ff;
+        }
+
+        /* =========================
    DPAD
 ========================= */
 
-.dpad-playstation{
+        .dpad-playstation {
 
-    width:210px;
-    height:210px;
+            width: 210px;
+            height: 210px;
 
-    padding:20px;
+            padding: 20px;
 
-    border-radius:50%;
+            border-radius: 50%;
 
-    display:flex;
-    flex-wrap:wrap;
+            display: flex;
+            flex-wrap: wrap;
 
-    background:#1b1b1b;
+            background: #1b1b1b;
 
-    box-shadow:
-        inset -15px -15px 20px rgba(0,0,0,.85),
-        inset 8px 8px 10px rgba(255,255,255,.06),
-        0 10px 20px rgba(0,0,0,.6);
-}
+            box-shadow:
+                inset -15px -15px 20px rgba(0, 0, 0, .85),
+                inset 8px 8px 10px rgba(255, 255, 255, .06),
+                0 10px 20px rgba(0, 0, 0, .6);
+        }
 
-.dbtn{
+        .dbtn {
 
-    width:70px;
-    height:70px;
+            width: 70px;
+            height: 70px;
 
-    border:none;
+            border: none;
 
-    position:relative;
+            position: relative;
 
-    cursor:pointer;
+            cursor: pointer;
 
-    background:
-        linear-gradient(
-        145deg,
-        #5e5e5e,
-        #262626);
+            background:
+                linear-gradient(145deg,
+                    #5e5e5e,
+                    #262626);
 
-    box-shadow:
-        inset -5px -5px 10px rgba(0,0,0,.8),
-        inset 3px 3px 5px rgba(255,255,255,.08);
+            box-shadow:
+                inset -5px -5px 10px rgba(0, 0, 0, .8),
+                inset 3px 3px 5px rgba(255, 255, 255, .08);
 
-    transition:.05s;
-}
+            transition: .05s;
+        }
 
-.dbtn:active{
+        .dbtn:active {
 
-    transform:
-        translateY(3px)
-        scale(.96);
+            transform:
+                translateY(3px) scale(.96);
 
-    background:
-        linear-gradient(
-        145deg,
-        #8a8a8a,
-        #3b3b3b);
-}
+            background:
+                linear-gradient(145deg,
+                    #8a8a8a,
+                    #3b3b3b);
+        }
 
-.cima{ border-radius:14px 14px 5px 5px; }
-.baixo{ border-radius:5px 5px 14px 14px; }
-.esquerda{ border-radius:14px 5px 5px 14px; }
-.direita{ border-radius:5px 14px 14px 5px; }
+        .cima {
+            border-radius: 14px 14px 5px 5px;
+        }
 
-.seta{
-    position:absolute;
-}
+        .baixo {
+            border-radius: 5px 5px 14px 14px;
+        }
 
-.cima .seta{
+        .esquerda {
+            border-radius: 14px 5px 5px 14px;
+        }
 
-    border-left:12px solid transparent;
-    border-right:12px solid transparent;
-    border-bottom:18px solid #151515;
+        .direita {
+            border-radius: 5px 14px 14px 5px;
+        }
 
-    left:23px;
-    top:22px;
-}
+        .seta {
+            position: absolute;
+        }
 
-.baixo .seta{
+        .cima .seta {
 
-    border-left:12px solid transparent;
-    border-right:12px solid transparent;
-    border-top:18px solid #151515;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 18px solid #151515;
 
-    left:23px;
-    top:28px;
-}
+            left: 23px;
+            top: 22px;
+        }
 
-.esquerda .seta{
+        .baixo .seta {
 
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    border-right:18px solid #151515;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 18px solid #151515;
 
-    left:22px;
-    top:23px;
-}
+            left: 23px;
+            top: 28px;
+        }
 
-.direita .seta{
+        .esquerda .seta {
 
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    border-left:18px solid #151515;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 18px solid #151515;
 
-    left:30px;
-    top:23px;
-}
+            left: 22px;
+            top: 23px;
+        }
 
-/* =========================
+        .direita .seta {
+
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 18px solid #151515;
+
+            left: 30px;
+            top: 23px;
+        }
+
+        /* =========================
    ANALÓGICO
 ========================= */
 
-.analogico-area{
+        .analogico-area {
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    gap:20px;
-}
+            gap: 20px;
+        }
 
-.analogico{
+        .analogico {
 
-    width:220px;
-    height:220px;
+            width: 170px;
+            height: 170px;
+            margin-top: -20px;
 
-    border-radius:50%;
+            border-radius: 50%;
 
-    position:relative;
+            position: relative;
 
-    overflow:hidden;
+            overflow: hidden;
 
-    touch-action:none;
+            touch-action: none;
 
-    background:
-        radial-gradient(circle at 30% 30%,
-        #4d4d4d 0%,
-        #222 60%,
-        #111 100%);
+            background:
+                radial-gradient(circle at 30% 30%,
+                    #4d4d4d 0%,
+                    #222 60%,
+                    #111 100%);
 
-    box-shadow:
-        inset -15px -15px 20px rgba(0,0,0,.9),
-        inset 8px 8px 10px rgba(255,255,255,.05),
-        0 10px 20px rgba(0,0,0,.8);
-}
+            box-shadow:
+                inset -15px -15px 20px rgba(0, 0, 0, .9),
+                inset 8px 8px 10px rgba(255, 255, 255, .05),
+                0 10px 20px rgba(0, 0, 0, .8);
+        }
 
-.stick{
+        .stick {
 
-    width:100px;
-    height:100px;
+            width: 50px;
+            height: 50px;
 
-    border-radius:50%;
+            border-radius: 50%;
 
-    position:absolute;
+            position: absolute;
 
-    left:50%;
-    top:50%;
+            left: 50%;
+            top: 50%;
 
-    transform:translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 
-    cursor:pointer;
+            cursor: pointer;
 
-    background:
-        radial-gradient(circle at 30% 30%,
-        #777 0%,
-        #333 50%,
-        #111 100%);
+            background:
+                radial-gradient(circle at 30% 30%,
+                    #777 0%,
+                    #333 50%,
+                    #111 100%);
 
-    box-shadow:
-        inset -8px -8px 12px rgba(0,0,0,.9),
-        inset 5px 5px 8px rgba(255,255,255,.08),
-        0 8px 15px rgba(0,0,0,.8);
-}
+            box-shadow:
+                inset -8px -8px 12px rgba(0, 0, 0, .9),
+                inset 5px 5px 8px rgba(255, 255, 255, .08),
+                0 8px 15px rgba(0, 0, 0, .8);
+        }
 
-.info{
+        .info {
 
-    color:white;
-    font-size:20px;
-}
+            color: white;
+            font-size: 20px;
+        }
 
-</style>
+        /* =========================
+           SUPORTES (MÃOS)
+        ========================= */
+        .suporte-esquerdo,
+        .suporte-direito {
+            width: 150px;
+            height: 260px;
+            background: #1b1b1b;
+            box-shadow:
+                inset -15px -15px 20px rgba(0, 0, 0, .85),
+                inset 8px 8px 10px rgba(255, 255, 255, .06),
+                0 10px 20px rgba(0, 0, 0, .6);
+            z-index: -10;
+        }
+
+        .suporte-esquerdo {
+            border-radius: 40px 10px 50px 120px;
+            transform: rotate(25deg);
+            margin-right: 100px;
+            margin-top: -50px;
+        }
+
+        .suporte-direito {
+            border-radius: 10px 40px 120px 50px;
+            transform: rotate(-25deg);
+            margin-left: 100px;
+            margin-top: -50px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    
-    <div class="row" style="padding-bottom: 20px;" >
-        <div style="width: 210px;padding:20px; border-radius:22px;  gap:20px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
-            <div class="row" >
-                <button class="dbtn" style="border-radius:22px; width:150px;">
-                    <div class="seta"></div>
-                </button>
-            </div>
-            <div class="row" >
-                <button class="dbtn" style="border-radius:22px; width:150px;">
-                    <div class="seta"></div>
-                </button>
-            </div>
-        </div>
-    
-        <div style="height: 170px;width:360px;"></div>
-
-
-        <div style="width: 210px;padding:20px; border-radius:22px;  gap:20px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
-            <div class="row" >
-                <button class="dbtn" style="border-radius:22px; width:150px;">
-                    <div class="seta"></div>
-                </button>
-            </div>
-            <div class="row" >
-                <button class="dbtn" style="border-radius:22px; width:150px;">
-                    <div class="seta"></div>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-    </div>
-
-    
-    <!-- DPAD -->
-    <div class="row">
-        <div class="dpad-playstation">
-
-            <div class="row">
-                <div class="square-70"></div>
-
-                <button class="dbtn cima">
-                    <div class="seta"></div>
-                </button>
-
-                <div class="square-70"></div>
-            </div>
-
-            <div class="row">
-
-                <button class="dbtn esquerda">
-                    <div class="seta"></div>
-                </button>
-
-                <div class="square-70"></div>
-
-                <button class="dbtn direita">
-                    <div class="seta"></div>
-                </button>
-
-            </div>
-
-            <div class="row">
-
-                <div class="square-70"></div>
-
-                <button class="dbtn baixo">
-                    <div class="seta"></div>
-                </button>
-
-                <div class="square-70"></div>
-
-            </div>
-
-        </div>
-
-        <div style="height: 170px;width:360px;margin-left: 20px;margin-right: 20px;margin-bottom: 20px;border-radius:22px;padding:20px 20px 20px 20px;display: flex;flex-wrap: wrap; align-self:flex-end;background-color: #1b1b1b;">
-            <div class="row" style="justify-content: space-between;">
-                <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
-                    <button class="dbtn" style="height: 40px;">
-                        
-                    </button>
-                    Select
-                </label>
-                <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
-                    <button class="dbtn " style="height: 40px;">
-                    </button>
-                    Start
-                </label>
-            </div>
-            <div class="row" style="justify-content: center;">
-                <label style="width:100px;display:flex;flex-direction: column;align-items: center;color:white;">
-                    <button class="dbtn diretira" style="height: 40px;width:100px">
+        <div class="row" style="padding-bottom: 5px;">
+            <div
+                style="width: 170px;height:120px;padding:20px 10px; border-radius:22px;  gap:5px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
+                <div class="row">
+                    <button class="dbtn" style="height:50px;width:150px;border-radius:22px; " data-btn="l2">
                         <div class="seta"></div>
                     </button>
-                    Analógico
-                </label>
+                </div>
+                <div class="row">
+                    <button class="dbtn" style="height:50px;width:150px;border-radius:22px; " data-btn="l1">
+                        <div class="seta"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div style="height: 170px;width:460px;"></div>
+
+
+            <div
+                style="width: 170px;height:120px;padding:20px 10px; border-radius:22px;  gap:5px; display:  flex; flex-wrap:wrap; justify-content: center; background-color:#1b1b1b;">
+                <div class="row">
+                    <button class="dbtn" style="height:50px;width:150px;border-radius:22px; " data-btn="r2">
+                        <div class="seta"></div>
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="dbtn" style="height:50px;width:150px;border-radius:22px; " data-btn="r1">
+                        <div class="seta"></div>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- BOTÕES -->
 
-        <div class="botoes-playstation">
 
-            <div class="row">
-                <div class="square-70"></div>
-                <button class="btn triangulo">△</button>
-                <div class="square-70"></div>
+        <!-- DPAD -->
+        <div class="row">
+            <div class="dpad-playstation">
+
+                <div class="row">
+                    <div class="square-70"></div>
+
+                    <button class="dbtn cima" data-btn="cima">
+                        <div class="seta"></div>
+                    </button>
+
+                    <div class="square-70"></div>
+                </div>
+
+                <div class="row">
+
+                    <button class="dbtn esquerda" data-btn="esquerda">
+                        <div class="seta"></div>
+                    </button>
+
+                    <div class="square-70"></div>
+
+                    <button class="dbtn direita" data-btn="direita">
+                        <div class="seta"></div>
+                    </button>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="square-70"></div>
+
+                    <button class="dbtn baixo" data-btn="baixo">
+                        <div class="seta"></div>
+                    </button>
+
+                    <div class="square-70"></div>
+
+                </div>
+
             </div>
 
-            <div class="row">
-                <button class="btn quadrado">□</button>
-                <div class="square-70"></div>
-                <button class="btn circulo">○</button>
+            <div class="nao-selecionavel"
+                style="height: 150px;width:360px;margin-left: 5px;margin-right: 5px;margin-bottom: 20px;border-radius:22px;padding:20px 20px 20px 20px;display: flex;flex-wrap: wrap; align-self:flex-end;background-color: #1b1b1b;">
+                <div class="row" style="justify-content: space-between;">
+                    <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
+                        <button class="dbtn" style="height: 40px;" data-btn="select">
+
+                        </button>
+                        Select
+                    </label>
+                    <label style="width:80px;display:flex;flex-direction: column;align-items: center;color:white;">
+                        <button class="dbtn " style="height: 40px;" data-btn="start">
+                        </button>
+                        Start
+                    </label>
+                </div>
+                <div class="row" style="justify-content: center;">
+                    <label style="width:100px;display:flex;flex-direction: column;align-items: center;color:white;">
+                        <button class="dbtn diretira" style="height: 40px;width:100px" data-btn="analogico_btn">
+                            <div class="seta"></div>
+                        </button>
+                        Analógico
+                    </label>
+                </div>
+                <div class="row">
+
+                    <!-- ANALÓGICO  ESQUERDO-->
+                    <div class="analogico-area">
+
+                        <div class="analogico" id="analogico-esquerdo">
+                            <div class="stick"></div>
+                        </div>
+
+                    </div>
+                    <div class="square-70"></div>
+                    <!-- ANALÓGICO DIREITO -->
+
+                    <div class="analogico-area">
+
+                        <div class="analogico" id="analogico-direito">
+                            <div class="stick"></div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
-            <div class="row">
-                <div class="square-70"></div>
-                <button class="btn xis">✕</button>
-                <div class="square-70"></div>
+            <!-- BOTÕES -->
+
+            <div class="botoes-playstation">
+
+                <div class="row">
+                    <div class="square-70"></div>
+                    <button class="btn triangulo" data-btn="triangulo">△</button>
+                    <div class="square-70"></div>
+                </div>
+
+                <div class="row">
+                    <button class="btn quadrado" data-btn="quadrado">□</button>
+                    <div class="square-70"></div>
+                    <button class="btn circulo" data-btn="circulo">○</button>
+                </div>
+
+                <div class="row">
+                    <div class="square-70"></div>
+                    <button class="btn xis" data-btn="xis">✕</button>
+                    <div class="square-70"></div>
+                </div>
+
             </div>
 
         </div>
 
+        <div class="row">
+            <div class="suporte-esquerdo">
+
+
+            </div>
+            <div style="height: 170px;width:480px;"></div>
+
+            <div class="suporte-direito">
+
+
+            </div>
+
+        </div>
     </div>
-    <div class="row">
-        <!-- ANALÓGICO  ESQUERDO-->
-        <div class="analogico-area">
 
-            <div class="analogico" id="analogico-esquerdo">
-                <div class="stick"></div>
-            </div>
+    <script>
 
-        </div>
-        <div class="square-70"></div>
-        <!-- ANALÓGICO DIREITO -->
+        /* =========================
+           ESTADO GLOBAL
+        ========================= */
 
-        <div class="analogico-area">
+        const controle = {
 
-            <div class="analogico" id="analogico-direito">
-                <div class="stick"></div>
-            </div>
+            analogicoEsquerdo: {
+                x: 0,
+                y: 0
+            },
 
-        </div>
- 
-    </div>
-</div>
+            analogicoDireito: {
+                x: 0,
+                y: 0
+            },
 
-<script>
+            botoes: {
 
-/* =========================
-   ESTADO GLOBAL
-========================= */
+                l2: false,
+                l1: false,
+                r2: false,
+                r1: false,
+                cima: false,
+                baixo: false,
+                esquerda: false,
+                direita: false,
+                select: false,
+                start: false,
+                analogico_btn: false,
+                triangulo: false,
+                quadrado: false,
+                circulo: false,
+                xis: false
+            }
+        };
 
-const controle = {
+        /* =========================
+           ANALÓGICOS
+        ========================= */
 
-    analogicoEsquerdo:{
-        x:0,
-        y:0
-    },
+        criarAnalogico(
+            "analogico-esquerdo",
+            "analogicoEsquerdo"
+        );
 
-    analogicoDireito:{
-        x:0,
-        y:0
-    },
+        criarAnalogico(
+            "analogico-direito",
+            "analogicoDireito"
+        );
 
-    botoes:{
+        function criarAnalogico(id, nomeVariavel) {
 
-        triangulo:false,
-        quadrado:false,
-        circulo:false,
-        xis:false
-    }
-};
+            const analogico =
+                document.getElementById(id);
 
-/* =========================
-   ANALÓGICOS
-========================= */
+            const stick =
+                analogico.querySelector(".stick");
 
-criarAnalogico(
-    "analogico-esquerdo",
-    "analogicoEsquerdo"
-);
+            let dragging = false;
 
-criarAnalogico(
-    "analogico-direito",
-    "analogicoDireito"
-);
+            const maxDistance = 60;
 
-function criarAnalogico(id, nomeVariavel){
+            analogico.addEventListener(
+                "pointerdown",
+                (e) => {
 
-    const analogico =
-        document.getElementById(id);
+                    dragging = true;
 
-    const stick =
-        analogico.querySelector(".stick");
+                    mover(e);
+                }
+            );
 
-    let dragging = false;
+            window.addEventListener(
+                "pointerup",
+                () => {
 
-    const maxDistance = 60;
+                    dragging = false;
 
-    analogico.addEventListener(
-        "pointerdown",
-        (e)=>{
+                    controle[nomeVariavel].x = 0;
+                    controle[nomeVariavel].y = 0;
 
-            dragging = true;
+                    stick.style.transition = ".2s";
 
-            mover(e);
-        }
-    );
+                    stick.style.transform =
+                        `translate(-50%, -50%)`;
 
-    window.addEventListener(
-        "pointerup",
-        ()=>{
 
-            dragging = false;
+                }
+            );
 
-            controle[nomeVariavel].x = 0;
-            controle[nomeVariavel].y = 0;
+            window.addEventListener(
+                "pointermove",
+                (e) => {
 
-            stick.style.transition = ".2s";
+                    if (!dragging) return;
 
-            stick.style.transform =
-                `translate(-50%, -50%)`;
+                    mover(e);
+                }
+            );
 
-            
-        }
-    );
+            function mover(e) {
 
-    window.addEventListener(
-        "pointermove",
-        (e)=>{
+                stick.style.transition = "0s";
 
-            if(!dragging) return;
+                const rect =
+                    analogico.getBoundingClientRect();
 
-            mover(e);
-        }
-    );
+                const centerX =
+                    rect.left + rect.width / 2;
 
-    function mover(e){
+                const centerY =
+                    rect.top + rect.height / 2;
 
-        stick.style.transition = "0s";
+                let dx = e.clientX - centerX;
+                let dy = e.clientY - centerY;
 
-        const rect =
-            analogico.getBoundingClientRect();
+                const distance =
+                    Math.sqrt(dx * dx + dy * dy);
 
-        const centerX =
-            rect.left + rect.width / 2;
+                if (distance > maxDistance) {
 
-        const centerY =
-            rect.top + rect.height / 2;
+                    const angle =
+                        Math.atan2(dy, dx);
 
-        let dx = e.clientX - centerX;
-        let dy = e.clientY - centerY;
+                    dx =
+                        Math.cos(angle) * maxDistance;
 
-        const distance =
-            Math.sqrt(dx*dx + dy*dy);
+                    dy =
+                        Math.sin(angle) * maxDistance;
+                }
 
-        if(distance > maxDistance){
-
-            const angle =
-                Math.atan2(dy, dx);
-
-            dx =
-                Math.cos(angle) * maxDistance;
-
-            dy =
-                Math.sin(angle) * maxDistance;
-        }
-
-        stick.style.transform =
-            `translate(
+                stick.style.transform =
+                    `translate(
                 calc(-50% + ${dx}px),
                 calc(-50% + ${dy}px)
             )`;
 
-        controle[nomeVariavel].x =
-            +(dx / maxDistance).toFixed(2);
+                controle[nomeVariavel].x =
+                    +(dx / maxDistance).toFixed(2);
 
-        controle[nomeVariavel].y =
-            +(dy / maxDistance).toFixed(2);
+                controle[nomeVariavel].y =
+                    +(dy / maxDistance).toFixed(2);
 
+
+            }
+        }
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        document.querySelectorAll("[data-btn]")
+            .forEach(btn => {
+
+                const nome =
+                    btn.dataset.btn;
+
+                btn.addEventListener(
+                    "pointerdown",
+                    () => {
+
+                        controle.botoes[nome] = true;
+
+
+                    }
+                );
+
+                btn.addEventListener(
+                    "pointerup",
+                    () => {
+
+                        controle.botoes[nome] = false;
+                    }
+                );
+            });
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        const statusDiv =
+            document.getElementById("status");
+
+        /* =========================
+           LOOP
+        ========================= */
+
+        /*
+        Aqui você pode enviar os dados:
         
-    }
-}
+        WebSocket
+        ESP8266
+        Fetch
+        Bluetooth
+        Game Engine
+        etc
+        */
 
-/* =========================
-   BOTÕES
-========================= */
+        setInterval(() => {
 
-document.querySelectorAll(".btn")
-.forEach(btn=>{
+            console.log(controle);
 
-    const nome =
-        btn.dataset.btn;
+        }, 100);
 
-    btn.addEventListener(
-        "pointerdown",
-        ()=>{
-
-            controle.botoes[nome] = true;
-
-            
-        }
-    );
-
-    btn.addEventListener(
-        "pointerup",
-        ()=>{
-
-            controle.botoes[nome] = false;
-        }
-    );
-});
-
-/* =========================
-   STATUS
-========================= */
-
-const statusDiv =
-    document.getElementById("status");
-
-/* =========================
-   LOOP
-========================= */
-
-/*
-Aqui você pode enviar os dados:
-
-WebSocket
-ESP8266
-Fetch
-Bluetooth
-Game Engine
-etc
-*/
-
-setInterval(()=>{
-
-    console.log(controle);
-
-}, 100);
-
-</script>
+    </script>
 
 </body>
+
 </html>
